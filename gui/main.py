@@ -212,10 +212,22 @@ class MainWindow(QMainWindow):
         layout.addWidget(button, 10, 5)
         button.clicked.connect(self.the_button_was_clicked)
 
+        button = QPushButton("Add Example File!")
+        button.setCheckable(True)
+        layout.addWidget(button, 10, 8)
+        button.clicked.connect(self.add_test_file)
+
         # creting the widget
         widget = QWidget()
         widget.setLayout(layout)
         self.setCentralWidget(widget)
+
+    def add_test_file(self):
+        file = open("./model/exampleFile.dzn", "r")
+        a = file.read()
+        print(a)
+        file.close()
+    
 
     def createCell(self, size):
         # crete che combobox
@@ -323,16 +335,121 @@ class MainWindow(QMainWindow):
     def the_button_was_clicked(self):
         string = self.create_string()
         # save the string in the file
-        file = open('../model/data.dzn', 'w')
+        file = open('./model/data.dzn', 'w')
         file.write(string)
         file.close()
 
         # solving 
-        res = subprocess.run(["minizinc", "sudoku.mzn", "data.mzn"], capture_output=True)
+        res = subprocess.run(["minizinc", "./model/solver.mzn", "./model/data.dzn"], capture_output=True)
         print(res.stdout)
+        resList = self.getResList(str(res).split('\'')[1])
+        self.insertCell(resList)
 
 
+    def getResList(self, res):
+        resList = []
+        blocks = res.split('=')[1].split(';')[0].split('[')[1].split(']')[0].strip().split('|')
         
+        for i in range(1,10):
+            b = blocks[i].split(' ')
+            for j in range(1,9):
+                resList.append(int(b[j].split(',')[0]))
+            resList.append(int(b[9].split('\\')[0]))
+        
+        return resList
+    
+
+    def insertCell(self, resList):
+        self.cell11.setCurrentIndex(resList.pop())
+        self.cell11.setCurrentIndex(resList.pop())
+        self.cell11.setCurrentIndex(resList.pop())
+        self.cell11.setCurrentIndex(resList.pop())
+        self.cell11.setCurrentIndex(resList.pop())
+        self.cell11.setCurrentIndex(resList.pop())
+        self.cell11.setCurrentIndex(resList.pop())
+        self.cell11.setCurrentIndex(resList.pop())
+        self.cell11.setCurrentIndex(resList.pop())
+
+        self.cell21.setCurrentIndex(resList.pop())
+        self.cell21.setCurrentIndex(resList.pop())
+        self.cell21.setCurrentIndex(resList.pop())
+        self.cell21.setCurrentIndex(resList.pop())
+        self.cell21.setCurrentIndex(resList.pop())
+        self.cell21.setCurrentIndex(resList.pop())
+        self.cell21.setCurrentIndex(resList.pop())
+        self.cell21.setCurrentIndex(resList.pop())
+        self.cell21.setCurrentIndex(resList.pop())
+
+        self.cell31.setCurrentIndex(resList.pop())
+        self.cell31.setCurrentIndex(resList.pop())
+        self.cell31.setCurrentIndex(resList.pop())
+        self.cell31.setCurrentIndex(resList.pop())
+        self.cell31.setCurrentIndex(resList.pop())
+        self.cell31.setCurrentIndex(resList.pop())
+        self.cell31.setCurrentIndex(resList.pop())
+        self.cell31.setCurrentIndex(resList.pop())
+        self.cell31.setCurrentIndex(resList.pop())
+
+        self.cell41.setCurrentIndex(resList.pop())
+        self.cell41.setCurrentIndex(resList.pop())
+        self.cell41.setCurrentIndex(resList.pop())
+        self.cell41.setCurrentIndex(resList.pop())
+        self.cell41.setCurrentIndex(resList.pop())
+        self.cell41.setCurrentIndex(resList.pop())
+        self.cell41.setCurrentIndex(resList.pop())
+        self.cell41.setCurrentIndex(resList.pop())
+        self.cell41.setCurrentIndex(resList.pop())
+
+        self.cell51.setCurrentIndex(resList.pop())
+        self.cell51.setCurrentIndex(resList.pop())
+        self.cell51.setCurrentIndex(resList.pop())
+        self.cell51.setCurrentIndex(resList.pop())
+        self.cell51.setCurrentIndex(resList.pop())
+        self.cell51.setCurrentIndex(resList.pop())
+        self.cell51.setCurrentIndex(resList.pop())
+        self.cell51.setCurrentIndex(resList.pop())
+        self.cell51.setCurrentIndex(resList.pop())
+
+        self.cell61.setCurrentIndex(resList.pop())
+        self.cell61.setCurrentIndex(resList.pop())
+        self.cell61.setCurrentIndex(resList.pop())
+        self.cell61.setCurrentIndex(resList.pop())
+        self.cell61.setCurrentIndex(resList.pop())
+        self.cell61.setCurrentIndex(resList.pop())
+        self.cell61.setCurrentIndex(resList.pop())
+        self.cell61.setCurrentIndex(resList.pop())
+        self.cell61.setCurrentIndex(resList.pop())
+
+        self.cell71.setCurrentIndex(resList.pop())
+        self.cell71.setCurrentIndex(resList.pop())
+        self.cell71.setCurrentIndex(resList.pop())
+        self.cell71.setCurrentIndex(resList.pop())
+        self.cell71.setCurrentIndex(resList.pop())
+        self.cell71.setCurrentIndex(resList.pop())
+        self.cell71.setCurrentIndex(resList.pop())
+        self.cell71.setCurrentIndex(resList.pop())
+        self.cell71.setCurrentIndex(resList.pop())
+
+        self.cell81.setCurrentIndex(resList.pop())
+        self.cell81.setCurrentIndex(resList.pop())
+        self.cell81.setCurrentIndex(resList.pop())
+        self.cell81.setCurrentIndex(resList.pop())
+        self.cell81.setCurrentIndex(resList.pop())
+        self.cell81.setCurrentIndex(resList.pop())
+        self.cell81.setCurrentIndex(resList.pop())
+        self.cell81.setCurrentIndex(resList.pop())
+        self.cell81.setCurrentIndex(resList.pop())
+
+        self.cell91.setCurrentIndex(resList.pop())
+        self.cell91.setCurrentIndex(resList.pop())
+        self.cell91.setCurrentIndex(resList.pop())
+        self.cell91.setCurrentIndex(resList.pop())
+        self.cell91.setCurrentIndex(resList.pop())
+        self.cell91.setCurrentIndex(resList.pop())
+        self.cell91.setCurrentIndex(resList.pop())
+        self.cell91.setCurrentIndex(resList.pop())
+        self.cell91.setCurrentIndex(resList.pop())
+
 
 app = QApplication(sys.argv)
 
