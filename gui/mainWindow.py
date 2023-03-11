@@ -226,6 +226,15 @@ class MainWindow(QMainWindow):
         layout.addWidget(self.cell98, 11, 10)
         layout.addWidget(self.cell99, 11, 11)
 
+        self.cells = [self.cell11, self.cell12, self.cell13, self.cell14, self.cell15, self.cell16, self.cell17, self.cell18, self.cell19, \
+                      self.cell21, self.cell22, self.cell23, self.cell24, self.cell25, self.cell26, self.cell27, self.cell28, self.cell29, \
+                        self.cell31, self.cell32, self.cell33, self.cell34, self.cell35, self.cell36, self.cell37, self.cell38, self.cell39, \
+                            self.cell41, self.cell42, self.cell43, self.cell44, self.cell45, self.cell46, self.cell47, self.cell48, self.cell49, \
+                                self.cell51, self.cell52, self.cell53, self.cell54, self.cell55, self.cell56, self.cell57, self.cell58, self.cell59, \
+                                    self.cell61, self.cell62, self.cell63, self.cell64, self.cell65, self.cell66, self.cell67, self.cell68, self.cell69, \
+                                        self.cell71, self.cell72, self.cell73, self.cell74, self.cell75, self.cell76, self.cell77, self.cell78, self.cell79, \
+                                            self.cell81, self.cell82, self.cell83, self.cell84, self.cell85, self.cell86, self.cell87, self.cell88, self.cell89, \
+                                                self.cell91, self.cell92, self.cell93, self.cell94, self.cell95, self.cell96, self.cell97, self.cell98, self.cell99]
 
         button = QPushButton("Clear!")
         button.setCheckable(True)
@@ -272,103 +281,107 @@ class MainWindow(QMainWindow):
             dlg.exec()
         else:
             resList = self.utils.getResList(str(res.stdout).split('\'')[1])
-            self.insertCell(resList)
+            # self.insertCell(resList, string)
+            self.utils.insertCell(self.cells, resList, string)
+    
     
     
     def create_string(self):
         string = "pre = \n[| " + \
-            self.cell11.currentText() + "," + \
-            self.cell12.currentText() + "," + \
-            self.cell13.currentText() + "," + \
-            self.cell14.currentText() + "," + \
-            self.cell15.currentText() + "," + \
-            self.cell16.currentText() + "," + \
-            self.cell17.currentText() + "," + \
-            self.cell18.currentText() + "," + \
+            self.cell11.currentText() + ", " + \
+            self.cell12.currentText() + ", " + \
+            self.cell13.currentText() + ", " + \
+            self.cell14.currentText() + ", " + \
+            self.cell15.currentText() + ", " + \
+            self.cell16.currentText() + ", " + \
+            self.cell17.currentText() + ", " + \
+            self.cell18.currentText() + ", " + \
             self.cell19.currentText() + "\n| " + \
             \
-            self.cell21.currentText() + "," + \
-            self.cell22.currentText() + "," + \
-            self.cell23.currentText() + "," + \
-            self.cell24.currentText() + "," + \
-            self.cell25.currentText() + "," + \
-            self.cell26.currentText() + "," + \
-            self.cell27.currentText() + "," + \
-            self.cell28.currentText() + "," + \
+            self.cell21.currentText() + ", " + \
+            self.cell22.currentText() + ", " + \
+            self.cell23.currentText() + ", " + \
+            self.cell24.currentText() + ", " + \
+            self.cell25.currentText() + ", " + \
+            self.cell26.currentText() + ", " + \
+            self.cell27.currentText() + ", " + \
+            self.cell28.currentText() + ", " + \
             self.cell29.currentText() + "\n| " + \
             \
-            self.cell31.currentText() + "," + \
-            self.cell32.currentText() + "," + \
-            self.cell33.currentText() + "," + \
-            self.cell34.currentText() + "," + \
-            self.cell35.currentText() + "," + \
-            self.cell36.currentText() + "," + \
-            self.cell37.currentText() + "," + \
-            self.cell38.currentText() + "," + \
+            self.cell31.currentText() + ", " + \
+            self.cell32.currentText() + ", " + \
+            self.cell33.currentText() + ", " + \
+            self.cell34.currentText() + ", " + \
+            self.cell35.currentText() + ", " + \
+            self.cell36.currentText() + ", " + \
+            self.cell37.currentText() + ", " + \
+            self.cell38.currentText() + ", " + \
             self.cell39.currentText() + "\n| " + \
             \
-            self.cell41.currentText() + "," + \
-            self.cell42.currentText() + "," + \
-            self.cell43.currentText() + "," + \
-            self.cell44.currentText() + "," + \
-            self.cell45.currentText() + "," + \
-            self.cell46.currentText() + "," + \
-            self.cell47.currentText() + "," + \
-            self.cell48.currentText() + "," + \
+            self.cell41.currentText() + ", " + \
+            self.cell42.currentText() + ", " + \
+            self.cell43.currentText() + ", " + \
+            self.cell44.currentText() + ", " + \
+            self.cell45.currentText() + ", " + \
+            self.cell46.currentText() + ", " + \
+            self.cell47.currentText() + ", " + \
+            self.cell48.currentText() + ", " + \
             self.cell49.currentText() + "\n| " + \
             \
-            self.cell51.currentText() + "," + \
-            self.cell52.currentText() + "," + \
-            self.cell53.currentText() + "," + \
-            self.cell54.currentText() + "," + \
-            self.cell55.currentText() + "," + \
-            self.cell56.currentText() + "," + \
-            self.cell57.currentText() + "," + \
-            self.cell58.currentText() + "," + \
+            self.cell51.currentText() + ", " + \
+            self.cell52.currentText() + ", " + \
+            self.cell53.currentText() + ", " + \
+            self.cell54.currentText() + ", " + \
+            self.cell55.currentText() + ", " + \
+            self.cell56.currentText() + ", " + \
+            self.cell57.currentText() + ", " + \
+            self.cell58.currentText() + ", " + \
             self.cell59.currentText() + "\n| " + \
             \
-            self.cell61.currentText() + "," + \
-            self.cell62.currentText() + "," + \
-            self.cell63.currentText() + "," + \
-            self.cell64.currentText() + "," + \
-            self.cell65.currentText() + "," + \
-            self.cell66.currentText() + "," + \
-            self.cell67.currentText() + "," + \
-            self.cell68.currentText() + "," + \
+            self.cell61.currentText() + ", " + \
+            self.cell62.currentText() + ", " + \
+            self.cell63.currentText() + ", " + \
+            self.cell64.currentText() + ", " + \
+            self.cell65.currentText() + ", " + \
+            self.cell66.currentText() + ", " + \
+            self.cell67.currentText() + ", " + \
+            self.cell68.currentText() + ", " + \
             self.cell69.currentText() + "\n| " + \
             \
-            self.cell71.currentText() + "," + \
-            self.cell72.currentText() + "," + \
-            self.cell73.currentText() + "," + \
-            self.cell74.currentText() + "," + \
-            self.cell75.currentText() + "," + \
-            self.cell76.currentText() + "," + \
-            self.cell77.currentText() + "," + \
-            self.cell78.currentText() + "," + \
+            self.cell71.currentText() + ", " + \
+            self.cell72.currentText() + ", " + \
+            self.cell73.currentText() + ", " + \
+            self.cell74.currentText() + ", " + \
+            self.cell75.currentText() + ", " + \
+            self.cell76.currentText() + ", " + \
+            self.cell77.currentText() + ", " + \
+            self.cell78.currentText() + ", " + \
             self.cell79.currentText() + "\n| " + \
             \
-            self.cell81.currentText() + "," + \
-            self.cell82.currentText() + "," + \
-            self.cell83.currentText() + "," + \
-            self.cell84.currentText() + "," + \
-            self.cell85.currentText() + "," + \
-            self.cell86.currentText() + "," + \
-            self.cell87.currentText() + "," + \
-            self.cell88.currentText() + "," + \
+            self.cell81.currentText() + ", " + \
+            self.cell82.currentText() + ", " + \
+            self.cell83.currentText() + ", " + \
+            self.cell84.currentText() + ", " + \
+            self.cell85.currentText() + ", " + \
+            self.cell86.currentText() + ", " + \
+            self.cell87.currentText() + ", " + \
+            self.cell88.currentText() + ", " + \
             self.cell89.currentText() + "\n| " + \
             \
-            self.cell91.currentText() + "," + \
-            self.cell92.currentText() + "," + \
-            self.cell93.currentText() + "," + \
-            self.cell94.currentText() + "," + \
-            self.cell95.currentText() + "," + \
-            self.cell96.currentText() + "," + \
-            self.cell97.currentText() + "," + \
-            self.cell98.currentText() + "," + \
+            self.cell91.currentText() + ", " + \
+            self.cell92.currentText() + ", " + \
+            self.cell93.currentText() + ", " + \
+            self.cell94.currentText() + ", " + \
+            self.cell95.currentText() + ", " + \
+            self.cell96.currentText() + ", " + \
+            self.cell97.currentText() + ", " + \
+            self.cell98.currentText() + ", " + \
             self.cell99.currentText() + " |];"
         return string
 
     def insertCell(self, resList):
+        #dataList = self.utils.getResList(data)
+
         self.cell11.setCurrentIndex(resList.pop(0))
         self.cell12.setCurrentIndex(resList.pop(0))
         self.cell13.setCurrentIndex(resList.pop(0))
