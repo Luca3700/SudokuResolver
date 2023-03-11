@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QMainWindow, QWidget, QComboBox, QGridLayout, QPushButton
+from PyQt5.QtWidgets import QMainWindow, QWidget, QLabel, QGridLayout, QPushButton
 from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import QDir
 import subprocess
@@ -18,6 +18,9 @@ class MainWindow(QMainWindow):
 
         layout = QGridLayout() # to create the cells layout
         cellSize = 80
+
+        label = QLabel()
+        label.setFixedSize(10,10)
 
         # row 1
         self.cell11 = self.utils.createCell(cellSize)
