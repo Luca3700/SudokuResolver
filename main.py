@@ -1,9 +1,8 @@
 from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QComboBox, QGridLayout, QPushButton
-from PyQt5.QtGui import QIcon, QPalette, QColor
+from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import QDir
 from qt_material import apply_stylesheet
 import sys
-import os
 import subprocess
 
 class MainWindow(QMainWindow):
