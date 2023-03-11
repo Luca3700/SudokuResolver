@@ -1,9 +1,10 @@
-from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QComboBox, QGridLayout, QPushButton
+from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QComboBox, QGridLayout, QPushButton, QDialog
 from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import QDir
 from qt_material import apply_stylesheet
 import sys
 import subprocess
+from gui.customDialog import *
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -333,8 +334,12 @@ class MainWindow(QMainWindow):
 
         # solving 
         res = subprocess.run(["minizinc", "./model/solver.mzn", "./model/data.dzn"], capture_output=True)
-        resList = self.getResList(str(res.stdout).split('\'')[1])
-        self.insertCell(resList)
+        if ("=====UNSATISFIABLE=====" in str(res.stdout)):
+            dlg = CustomDialog()
+            dlg.exec()
+        else:
+            resList = self.getResList(str(res.stdout).split('\'')[1])
+            self.insertCell(resList)
 
 
     def getResList(self, res):
