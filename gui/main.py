@@ -1,12 +1,18 @@
 from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QComboBox, QGridLayout, QPushButton
+from PyQt5.QtGui import QIcon, QPalette, QColor
+from PyQt5.QtCore import QDir
 from qt_material import apply_stylesheet
 import sys
+import os
+import subprocess
 
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
 
         self.setWindowTitle("Sudoku Solver")
+        # setting app icon (source: https://www.flaticon.com/free-icon/sudoku_5732078?term=sudoku&page=1&position=7&origin=tag&related_id=5732078)
+        self.setWindowIcon(QIcon(QDir.currentPath() + '/gui/res/icons/sudoku.png'))
         self.resize(1000,1000)
 
         layout = QGridLayout() # to create the cells layout
@@ -192,6 +198,14 @@ class MainWindow(QMainWindow):
         layout.addWidget(self.cell98, 9, 8)
         layout.addWidget(self.cell99, 9, 9)
 
+        #QComboBox(layout.itemAtPosition(1,2).widget().adjustSize(20,20)).setFixedSize(20,20)
+        #layout.itemAtPosition(1,2).widget().setFixedSize(50,50)
+        # palette = QPalette()
+        # palette.setColor(QPalette.Active, QPalette.WindowText, QColor(100,10,10))
+        # layout.itemAtPosition(1,2).widget().setPalette(palette)
+        #print(layout.itemAtPosition(1,2).widget().windowIconText())
+        #print(QComboBox(layout.itemAtPosition(1,2).widget()))
+        # print(self.cell12.currentText())
 
         button = QPushButton("Solve it!")
         button.setCheckable(True)
@@ -208,6 +222,8 @@ class MainWindow(QMainWindow):
         items = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
         cell = QComboBox()
         cell.addItems(items)
+        #cell.setCurrentText("0")
+        cell.setCurrentIndex(0)
         cell.setFixedSize(size, size)
         return cell
     
@@ -307,11 +323,15 @@ class MainWindow(QMainWindow):
     def the_button_was_clicked(self):
         string = self.create_string()
         # save the string in the file
-        file = open('../model/file.dzn', 'w')
+        file = open('../model/data.dzn', 'w')
         file.write(string)
         file.close()
 
         # solving 
+        res = subprocess.run(["minizinc", "sudoku.mzn", "data.mzn"], capture_output=True)
+        print(res.stdout)
+
+
         
 
 app = QApplication(sys.argv)
