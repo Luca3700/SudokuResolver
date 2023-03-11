@@ -3,29 +3,32 @@ from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import QDir
 import subprocess
 from gui.customDialog import *
+from gui.utils import *
 
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
 
+        self.utils = Utils()
+
         self.setWindowTitle("Sudoku Solver")
         # setting app icon (source: https://www.flaticon.com/free-icon/sudoku_5732078?term=sudoku&page=1&position=7&origin=tag&related_id=5732078)
         self.setWindowIcon(QIcon(QDir.currentPath() + '/gui/icons/sudoku.png'))
-        self.resize(1000,1000)
+        self.resize(900,900)
 
         layout = QGridLayout() # to create the cells layout
         cellSize = 80
 
         # row 1
-        self.cell11 = self.createCell(cellSize)
-        self.cell12 = self.createCell(cellSize)
-        self.cell13 = self.createCell(cellSize)
-        self.cell14 = self.createCell(cellSize)
-        self.cell15 = self.createCell(cellSize)
-        self.cell16 = self.createCell(cellSize)
-        self.cell17 = self.createCell(cellSize)
-        self.cell18 = self.createCell(cellSize)
-        self.cell19 = self.createCell(cellSize)
+        self.cell11 = self.utils.createCell(cellSize)
+        self.cell12 = self.utils.createCell(cellSize)
+        self.cell13 = self.utils.createCell(cellSize)
+        self.cell14 = self.utils.createCell(cellSize)
+        self.cell15 = self.utils.createCell(cellSize)
+        self.cell16 = self.utils.createCell(cellSize)
+        self.cell17 = self.utils.createCell(cellSize)
+        self.cell18 = self.utils.createCell(cellSize)
+        self.cell19 = self.utils.createCell(cellSize)
         layout.addWidget(self.cell11, 1, 1)
         layout.addWidget(self.cell12, 1, 2) 
         layout.addWidget(self.cell13, 1, 3)    
@@ -37,15 +40,15 @@ class MainWindow(QMainWindow):
         layout.addWidget(self.cell19, 1, 9)
 
         # row 2
-        self.cell21 = self.createCell(cellSize)
-        self.cell22 = self.createCell(cellSize)
-        self.cell23 = self.createCell(cellSize)
-        self.cell24 = self.createCell(cellSize)
-        self.cell25 = self.createCell(cellSize)
-        self.cell26 = self.createCell(cellSize)
-        self.cell27 = self.createCell(cellSize)
-        self.cell28 = self.createCell(cellSize)
-        self.cell29 = self.createCell(cellSize)
+        self.cell21 = self.utils.createCell(cellSize)
+        self.cell22 = self.utils.createCell(cellSize)
+        self.cell23 = self.utils.createCell(cellSize)
+        self.cell24 = self.utils.createCell(cellSize)
+        self.cell25 = self.utils.createCell(cellSize)
+        self.cell26 = self.utils.createCell(cellSize)
+        self.cell27 = self.utils.createCell(cellSize)
+        self.cell28 = self.utils.createCell(cellSize)
+        self.cell29 = self.utils.createCell(cellSize)
         layout.addWidget(self.cell21, 2, 1)
         layout.addWidget(self.cell22, 2, 2) 
         layout.addWidget(self.cell23, 2, 3)    
@@ -57,15 +60,15 @@ class MainWindow(QMainWindow):
         layout.addWidget(self.cell29, 2, 9)
 
         # row 3
-        self.cell31 = self.createCell(cellSize)
-        self.cell32 = self.createCell(cellSize)
-        self.cell33 = self.createCell(cellSize)
-        self.cell34 = self.createCell(cellSize)
-        self.cell35 = self.createCell(cellSize)
-        self.cell36 = self.createCell(cellSize)
-        self.cell37 = self.createCell(cellSize)
-        self.cell38 = self.createCell(cellSize)
-        self.cell39 = self.createCell(cellSize)
+        self.cell31 = self.utils.createCell(cellSize)
+        self.cell32 = self.utils.createCell(cellSize)
+        self.cell33 = self.utils.createCell(cellSize)
+        self.cell34 = self.utils.createCell(cellSize)
+        self.cell35 = self.utils.createCell(cellSize)
+        self.cell36 = self.utils.createCell(cellSize)
+        self.cell37 = self.utils.createCell(cellSize)
+        self.cell38 = self.utils.createCell(cellSize)
+        self.cell39 = self.utils.createCell(cellSize)
         layout.addWidget(self.cell31, 3, 1)
         layout.addWidget(self.cell32, 3, 2) 
         layout.addWidget(self.cell33, 3, 3)    
@@ -77,15 +80,15 @@ class MainWindow(QMainWindow):
         layout.addWidget(self.cell39, 3, 9)
 
         # row 4
-        self.cell41 = self.createCell(cellSize)
-        self.cell42 = self.createCell(cellSize)
-        self.cell43 = self.createCell(cellSize)
-        self.cell44 = self.createCell(cellSize)
-        self.cell45 = self.createCell(cellSize)
-        self.cell46 = self.createCell(cellSize)
-        self.cell47 = self.createCell(cellSize)
-        self.cell48 = self.createCell(cellSize)
-        self.cell49 = self.createCell(cellSize)
+        self.cell41 = self.utils.createCell(cellSize)
+        self.cell42 = self.utils.createCell(cellSize)
+        self.cell43 = self.utils.createCell(cellSize)
+        self.cell44 = self.utils.createCell(cellSize)
+        self.cell45 = self.utils.createCell(cellSize)
+        self.cell46 = self.utils.createCell(cellSize)
+        self.cell47 = self.utils.createCell(cellSize)
+        self.cell48 = self.utils.createCell(cellSize)
+        self.cell49 = self.utils.createCell(cellSize)
         layout.addWidget(self.cell41, 4, 1)
         layout.addWidget(self.cell42, 4, 2) 
         layout.addWidget(self.cell43, 4, 3)    
@@ -97,15 +100,15 @@ class MainWindow(QMainWindow):
         layout.addWidget(self.cell49, 4, 9)
 
         # row 5
-        self.cell51 = self.createCell(cellSize)
-        self.cell52 = self.createCell(cellSize)
-        self.cell53 = self.createCell(cellSize)
-        self.cell54 = self.createCell(cellSize)
-        self.cell55 = self.createCell(cellSize)
-        self.cell56 = self.createCell(cellSize)
-        self.cell57 = self.createCell(cellSize)
-        self.cell58 = self.createCell(cellSize)
-        self.cell59 = self.createCell(cellSize)
+        self.cell51 = self.utils.createCell(cellSize)
+        self.cell52 = self.utils.createCell(cellSize)
+        self.cell53 = self.utils.createCell(cellSize)
+        self.cell54 = self.utils.createCell(cellSize)
+        self.cell55 = self.utils.createCell(cellSize)
+        self.cell56 = self.utils.createCell(cellSize)
+        self.cell57 = self.utils.createCell(cellSize)
+        self.cell58 = self.utils.createCell(cellSize)
+        self.cell59 = self.utils.createCell(cellSize)
         layout.addWidget(self.cell51, 5, 1)
         layout.addWidget(self.cell52, 5, 2) 
         layout.addWidget(self.cell53, 5, 3)    
@@ -117,15 +120,15 @@ class MainWindow(QMainWindow):
         layout.addWidget(self.cell59, 5, 9)
 
         # row 6
-        self.cell61 = self.createCell(cellSize)
-        self.cell62 = self.createCell(cellSize)
-        self.cell63 = self.createCell(cellSize)
-        self.cell64 = self.createCell(cellSize)
-        self.cell65 = self.createCell(cellSize)
-        self.cell66 = self.createCell(cellSize)
-        self.cell67 = self.createCell(cellSize)
-        self.cell68 = self.createCell(cellSize)
-        self.cell69 = self.createCell(cellSize)
+        self.cell61 = self.utils.createCell(cellSize)
+        self.cell62 = self.utils.createCell(cellSize)
+        self.cell63 = self.utils.createCell(cellSize)
+        self.cell64 = self.utils.createCell(cellSize)
+        self.cell65 = self.utils.createCell(cellSize)
+        self.cell66 = self.utils.createCell(cellSize)
+        self.cell67 = self.utils.createCell(cellSize)
+        self.cell68 = self.utils.createCell(cellSize)
+        self.cell69 = self.utils.createCell(cellSize)
         layout.addWidget(self.cell61, 6, 1)
         layout.addWidget(self.cell62, 6, 2) 
         layout.addWidget(self.cell63, 6, 3)    
@@ -137,15 +140,15 @@ class MainWindow(QMainWindow):
         layout.addWidget(self.cell69, 6, 9)
 
         # row 7
-        self.cell71 = self.createCell(cellSize)
-        self.cell72 = self.createCell(cellSize)
-        self.cell73 = self.createCell(cellSize)
-        self.cell74 = self.createCell(cellSize)
-        self.cell75 = self.createCell(cellSize)
-        self.cell76 = self.createCell(cellSize)
-        self.cell77 = self.createCell(cellSize)
-        self.cell78 = self.createCell(cellSize)
-        self.cell79 = self.createCell(cellSize)
+        self.cell71 = self.utils.createCell(cellSize)
+        self.cell72 = self.utils.createCell(cellSize)
+        self.cell73 = self.utils.createCell(cellSize)
+        self.cell74 = self.utils.createCell(cellSize)
+        self.cell75 = self.utils.createCell(cellSize)
+        self.cell76 = self.utils.createCell(cellSize)
+        self.cell77 = self.utils.createCell(cellSize)
+        self.cell78 = self.utils.createCell(cellSize)
+        self.cell79 = self.utils.createCell(cellSize)
         layout.addWidget(self.cell71, 7, 1)
         layout.addWidget(self.cell72, 7, 2) 
         layout.addWidget(self.cell73, 7, 3)    
@@ -157,15 +160,15 @@ class MainWindow(QMainWindow):
         layout.addWidget(self.cell79, 7, 9)
 
         # row 8
-        self.cell81 = self.createCell(cellSize)
-        self.cell82 = self.createCell(cellSize)
-        self.cell83 = self.createCell(cellSize)
-        self.cell84 = self.createCell(cellSize)
-        self.cell85 = self.createCell(cellSize)
-        self.cell86 = self.createCell(cellSize)
-        self.cell87 = self.createCell(cellSize)
-        self.cell88 = self.createCell(cellSize)
-        self.cell89 = self.createCell(cellSize)
+        self.cell81 = self.utils.createCell(cellSize)
+        self.cell82 = self.utils.createCell(cellSize)
+        self.cell83 = self.utils.createCell(cellSize)
+        self.cell84 = self.utils.createCell(cellSize)
+        self.cell85 = self.utils.createCell(cellSize)
+        self.cell86 = self.utils.createCell(cellSize)
+        self.cell87 = self.utils.createCell(cellSize)
+        self.cell88 = self.utils.createCell(cellSize)
+        self.cell89 = self.utils.createCell(cellSize)
         layout.addWidget(self.cell81, 8, 1)
         layout.addWidget(self.cell82, 8, 2) 
         layout.addWidget(self.cell83, 8, 3)    
@@ -177,15 +180,15 @@ class MainWindow(QMainWindow):
         layout.addWidget(self.cell89, 8, 9)
 
         # row 9
-        self.cell91 = self.createCell(cellSize)
-        self.cell92 = self.createCell(cellSize)
-        self.cell93 = self.createCell(cellSize)
-        self.cell94 = self.createCell(cellSize)
-        self.cell95 = self.createCell(cellSize)
-        self.cell96 = self.createCell(cellSize)
-        self.cell97 = self.createCell(cellSize)
-        self.cell98 = self.createCell(cellSize)
-        self.cell99 = self.createCell(cellSize)
+        self.cell91 = self.utils.createCell(cellSize)
+        self.cell92 = self.utils.createCell(cellSize)
+        self.cell93 = self.utils.createCell(cellSize)
+        self.cell94 = self.utils.createCell(cellSize)
+        self.cell95 = self.utils.createCell(cellSize)
+        self.cell96 = self.utils.createCell(cellSize)
+        self.cell97 = self.utils.createCell(cellSize)
+        self.cell98 = self.utils.createCell(cellSize)
+        self.cell99 = self.utils.createCell(cellSize)
         layout.addWidget(self.cell91, 9, 1)
         layout.addWidget(self.cell92, 9, 2) 
         layout.addWidget(self.cell93, 9, 3)    
@@ -197,13 +200,21 @@ class MainWindow(QMainWindow):
         layout.addWidget(self.cell99, 9, 9)
 
 
-        button = QPushButton("Solve it!")
+        button = QPushButton("Clear!")
         button.setCheckable(True)
+        button.setFixedSize(cellSize, 50)
+        layout.addWidget(button, 10, 2)
+        button.clicked.connect(self.clearAll)
+
+        button = QPushButton("Solve\nit!")
+        button.setCheckable(True)
+        button.setFixedSize(cellSize, 50)
         layout.addWidget(button, 10, 5)
         button.clicked.connect(self.the_button_was_clicked)
 
-        button = QPushButton("Add Example File!")
+        button = QPushButton("Example\nFile!")
         button.setCheckable(True)
+        button.setFixedSize(cellSize, 50)
         layout.addWidget(button, 10, 8)
         button.clicked.connect(self.add_test_file)
 
@@ -212,23 +223,30 @@ class MainWindow(QMainWindow):
         widget.setLayout(layout)
         self.setCentralWidget(widget)
 
+
     def add_test_file(self):
         file = open("./model/exampleFile.dzn", "r")
         a = file.read()
         file.close()
-        resList = self.getResList(a)
+        resList = self.utils.getResList(a)
         self.insertCell(resList)
-    
 
-    def createCell(self, size):
-        # crete che combobox
-        items = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
-        cell = QComboBox()
-        cell.addItems(items)
-        #cell.setCurrentText("0")
-        cell.setCurrentIndex(0)
-        cell.setFixedSize(size, size)
-        return cell
+    def the_button_was_clicked(self):
+        string = self.create_string()
+        # save the string in the file
+        file = open('./model/data.dzn', 'w')
+        file.write(string)
+        file.close()
+
+        # solving 
+        res = subprocess.run(["minizinc", "./model/solver.mzn", "./model/data.dzn"], capture_output=True)
+        if ("=====UNSATISFIABLE=====" in str(res.stdout)):
+            dlg = CustomDialog()
+            dlg.exec()
+        else:
+            resList = self.utils.getResList(str(res.stdout).split('\'')[1])
+            self.insertCell(resList)
+    
     
     def create_string(self):
         string = "pre = \n[| " + \
@@ -323,41 +341,6 @@ class MainWindow(QMainWindow):
             self.cell99.currentText() + " |];"
         return string
 
-    def the_button_was_clicked(self):
-        string = self.create_string()
-        # save the string in the file
-        file = open('./model/data.dzn', 'w')
-        file.write(string)
-        file.close()
-
-        # solving 
-        res = subprocess.run(["minizinc", "./model/solver.mzn", "./model/data.dzn"], capture_output=True)
-        if ("=====UNSATISFIABLE=====" in str(res.stdout)):
-            dlg = CustomDialog()
-            dlg.exec()
-        else:
-            resList = self.getResList(str(res.stdout).split('\'')[1])
-            self.insertCell(resList)
-
-
-    def getResList(self, res):
-        resList = []
-        a1 = res.split('=')[1]
-        a1 = a1.split(';')[0]
-        a1 = a1.split('[')[1]
-        a1 = a1.split(']')[0]
-        blocks = a1.strip().split('|')
-        #blocks = res.split('=')[1].split(';')[0].split('[')[1].split(']')[0].strip().split('|')
-        
-        for i in range(1,10):
-            b = blocks[i].split(' ')
-            for j in range(1,9):
-                resList.append(int(b[j].split(',')[0]))
-            resList.append(int(b[9].split('\\')[0]))
-        
-        return resList
-    
-
     def insertCell(self, resList):
         self.cell11.setCurrentIndex(resList.pop(0))
         self.cell12.setCurrentIndex(resList.pop(0))
@@ -448,3 +431,94 @@ class MainWindow(QMainWindow):
         self.cell97.setCurrentIndex(resList.pop(0))
         self.cell98.setCurrentIndex(resList.pop(0))
         self.cell99.setCurrentIndex(resList.pop(0))
+
+    def clearAll(self):
+        self.cell11.setCurrentIndex(0)
+        self.cell12.setCurrentIndex(0)
+        self.cell13.setCurrentIndex(0)
+        self.cell14.setCurrentIndex(0)
+        self.cell15.setCurrentIndex(0)
+        self.cell16.setCurrentIndex(0)
+        self.cell17.setCurrentIndex(0)
+        self.cell18.setCurrentIndex(0)
+        self.cell19.setCurrentIndex(0)
+
+        self.cell21.setCurrentIndex(0)
+        self.cell22.setCurrentIndex(0)
+        self.cell23.setCurrentIndex(0)
+        self.cell24.setCurrentIndex(0)
+        self.cell25.setCurrentIndex(0)
+        self.cell26.setCurrentIndex(0)
+        self.cell27.setCurrentIndex(0)
+        self.cell28.setCurrentIndex(0)
+        self.cell29.setCurrentIndex(0)
+
+        self.cell31.setCurrentIndex(0)
+        self.cell32.setCurrentIndex(0)
+        self.cell33.setCurrentIndex(0)
+        self.cell34.setCurrentIndex(0)
+        self.cell35.setCurrentIndex(0)
+        self.cell36.setCurrentIndex(0)
+        self.cell37.setCurrentIndex(0)
+        self.cell38.setCurrentIndex(0)
+        self.cell39.setCurrentIndex(0)
+
+        self.cell41.setCurrentIndex(0)
+        self.cell42.setCurrentIndex(0)
+        self.cell43.setCurrentIndex(0)
+        self.cell44.setCurrentIndex(0)
+        self.cell45.setCurrentIndex(0)
+        self.cell46.setCurrentIndex(0)
+        self.cell47.setCurrentIndex(0)
+        self.cell48.setCurrentIndex(0)
+        self.cell49.setCurrentIndex(0)
+
+        self.cell51.setCurrentIndex(0)
+        self.cell52.setCurrentIndex(0)
+        self.cell53.setCurrentIndex(0)
+        self.cell54.setCurrentIndex(0)
+        self.cell55.setCurrentIndex(0)
+        self.cell56.setCurrentIndex(0)
+        self.cell57.setCurrentIndex(0)
+        self.cell58.setCurrentIndex(0)
+        self.cell59.setCurrentIndex(0)
+
+        self.cell61.setCurrentIndex(0)
+        self.cell62.setCurrentIndex(0)
+        self.cell63.setCurrentIndex(0)
+        self.cell64.setCurrentIndex(0)
+        self.cell65.setCurrentIndex(0)
+        self.cell66.setCurrentIndex(0)
+        self.cell67.setCurrentIndex(0)
+        self.cell68.setCurrentIndex(0)
+        self.cell69.setCurrentIndex(0)
+
+        self.cell71.setCurrentIndex(0)
+        self.cell72.setCurrentIndex(0)
+        self.cell73.setCurrentIndex(0)
+        self.cell74.setCurrentIndex(0)
+        self.cell75.setCurrentIndex(0)
+        self.cell76.setCurrentIndex(0)
+        self.cell77.setCurrentIndex(0)
+        self.cell78.setCurrentIndex(0)
+        self.cell79.setCurrentIndex(0)
+
+        self.cell81.setCurrentIndex(0)
+        self.cell82.setCurrentIndex(0)
+        self.cell83.setCurrentIndex(0)
+        self.cell84.setCurrentIndex(0)
+        self.cell85.setCurrentIndex(0)
+        self.cell86.setCurrentIndex(0)
+        self.cell87.setCurrentIndex(0)
+        self.cell88.setCurrentIndex(0)
+        self.cell89.setCurrentIndex(0)
+
+        self.cell91.setCurrentIndex(0)
+        self.cell92.setCurrentIndex(0)
+        self.cell93.setCurrentIndex(0)
+        self.cell94.setCurrentIndex(0)
+        self.cell95.setCurrentIndex(0)
+        self.cell96.setCurrentIndex(0)
+        self.cell97.setCurrentIndex(0)
+        self.cell98.setCurrentIndex(0)
+        self.cell99.setCurrentIndex(0)
