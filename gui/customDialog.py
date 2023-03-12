@@ -1,6 +1,6 @@
 from PyQt5.QtWidgets import QDialog, QDialogButtonBox, QVBoxLayout, QLabel
 
-"source https://www.pythonguis.com/tutorials/pyqt-dialogs/"
+#source: https://www.pythonguis.com/tutorials/pyqt-dialogs/
 class CustomDialog(QDialog):
     def __init__(self):
         super().__init__()

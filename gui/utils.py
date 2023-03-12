@@ -15,7 +15,7 @@ class Utils():
         cell.setFixedSize(size, size)
         return cell
 
-    def create_string(self, cells):
+    def createString(self, cells):
         # create the string that will be printed in the data.dzn file
         # that will be used from minizinc to get the cell inserted from the user
         string = "pre = \n[| "
@@ -74,7 +74,7 @@ class Utils():
             cell.setCurrentIndex(0)
   
 
-    def add_test_file(self, cells, resList):
+    def addTestFile(self, cells, resList):
         # insert in the cells the numbers in exampleFile.dzn
         for i in range(len(resList)):
             cells[i].setCurrentIndex(resList[i])

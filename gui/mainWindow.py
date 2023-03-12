@@ -252,14 +252,14 @@ class MainWindow(QMainWindow):
         button.setCheckable(True)
         button.setFixedSize(cellSize, 50)
         layout.addWidget(button, 12, 6)
-        button.clicked.connect(self.the_button_was_clicked)
+        button.clicked.connect(self.solve)
 
         # button to load the example sudoku
         button = QPushButton("Load\nmodel")
         button.setCheckable(True)
         button.setFixedSize(cellSize, 50)
         layout.addWidget(button, 12, 9)
-        button.clicked.connect(self.add_test_file)
+        button.clicked.connect(self.addTestFile)
 
         # creting the widget
         widget = QWidget()
@@ -272,17 +272,17 @@ class MainWindow(QMainWindow):
         self.utils.clearAll(self.cells)
 
     # action of the "Load model" button
-    def add_test_file(self):
+    def addTestFile(self):
         file = open("./model/exampleFile.dzn", "r")
         a = file.read()
         file.close()
         resList = self.utils.getResList(a)
         #self.insertCell(resList)
-        self.utils.add_test_file(self.cells, resList)
+        self.utils.addTestFile(self.cells, resList)
 
     # action of the "Solve it!" button
-    def the_button_was_clicked(self):
-        string = self.utils.create_string(self.cells)
+    def solve(self):
+        string = self.utils.createString(self.cells)
         # save the string in the file
         file = open('./model/data.dzn', 'w')
         file.write(string)
