@@ -1,8 +1,13 @@
 from gui.customComboBox import *
+import darkdetect
 
 class Utils():
     def __init__(self):
         super().__init__()
+        try:
+            self.isDark = darkdetect.isDark()
+        except:
+            self.isDark = False
 
     def createCell(self, size):
         # crete che combobox
@@ -50,11 +55,18 @@ class Utils():
             number2 = dataList.pop(0)
             if number2 == 0:
                 cell.setCurrentIndex(int(number1))
-                cell.setStyleSheet("QComboBox"
-                                     "{"
-                                     "border : 2px black;"
-                                     "border-style : dashed;"
-                                     "}")
+                if self.isDark:
+                    cell.setStyleSheet("QComboBox"
+                                        "{"
+                                        "border : 2px white;"
+                                        "border-style : dashed;"
+                                        "}")   
+                else:
+                    cell.setStyleSheet("QComboBox"
+                                        "{"
+                                        "border : 2px black;"
+                                        "border-style : dashed;"
+                                        "}")
                 
     def clearAll(self, cells):
         # clear all the cells
