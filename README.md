@@ -5,12 +5,9 @@ To solve the problem, it is used MiniZinc, a free and open-source constraint mod
 
 ## Installation
 1. Clone the repo:
-`git clone https://github.com/Luca3700/SudokuResolver.git`
+`git clone https://github.com/Luca3700/SudokuSolver.git`
 2. Install the requirements 
 `pip install -r requirements.txt`
 3. Install minizinc following the documentation [here](https://www.minizinc.org/software.html)
 4. Run from the home directory of the project
 `python3 main.py` 
-
-## To do
-* improve the aesthetics of the graphics
