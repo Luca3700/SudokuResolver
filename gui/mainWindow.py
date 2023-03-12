@@ -1,5 +1,5 @@
 from PyQt5.QtWidgets import QMainWindow, QWidget, QLabel, QGridLayout, QPushButton
-from PyQt5.QtGui import QIcon
+from PyQt5.QtGui import QIcon, QFont
 from PyQt5.QtCore import QDir
 import subprocess
 from gui.customDialog import *
@@ -9,6 +9,7 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
 
+        # importing utils file
         self.utils = Utils()
 
         self.setWindowTitle("Sudoku Solver")
@@ -16,9 +17,11 @@ class MainWindow(QMainWindow):
         self.setWindowIcon(QIcon(QDir.currentPath() + '/gui/icons/sudoku.png'))
         self.resize(900,900)
 
-        layout = QGridLayout() # to create the cells layout
+        # to creating the cells layout
+        layout = QGridLayout() 
         cellSize = 80
 
+        # label used to create padding between the macro cells
         label = QLabel()
         label.setFixedSize(10,10)
 
@@ -226,6 +229,7 @@ class MainWindow(QMainWindow):
         layout.addWidget(self.cell98, 11, 10)
         layout.addWidget(self.cell99, 11, 11)
 
+        # list containing all the cells
         self.cells = [self.cell11, self.cell12, self.cell13, self.cell14, self.cell15, self.cell16, self.cell17, self.cell18, self.cell19, \
                       self.cell21, self.cell22, self.cell23, self.cell24, self.cell25, self.cell26, self.cell27, self.cell28, self.cell29, \
                         self.cell31, self.cell32, self.cell33, self.cell34, self.cell35, self.cell36, self.cell37, self.cell38, self.cell39, \
@@ -236,6 +240,7 @@ class MainWindow(QMainWindow):
                                             self.cell81, self.cell82, self.cell83, self.cell84, self.cell85, self.cell86, self.cell87, self.cell88, self.cell89, \
                                                 self.cell91, self.cell92, self.cell93, self.cell94, self.cell95, self.cell96, self.cell97, self.cell98, self.cell99]
 
+        # defining buttons
         button = QPushButton("Clear!")
         button.setCheckable(True)
         button.setFixedSize(cellSize, 50)
@@ -248,7 +253,9 @@ class MainWindow(QMainWindow):
         layout.addWidget(button, 12, 6)
         button.clicked.connect(self.the_button_was_clicked)
 
-        button = QPushButton("Example\nFile!")
+        # button to load the example sudoku
+        button = QPushButton("Load\nmodel")
+        button.setFont(QFont('Times',5))
         button.setCheckable(True)
         button.setFixedSize(cellSize, 50)
         layout.addWidget(button, 12, 9)

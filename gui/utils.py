@@ -26,11 +26,6 @@ class Utils():
         # crete che combobox
         items = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
         cell = QComboBox()
-        # cell.setStyleSheet("QComboBox"
-        #                              "{"
-        #                              "border : 2px black;"
-        #                              "border-style : dashed;"
-        #                              "}")
         cell.addItems(items)
         cell.setCurrentIndex(0)
         cell.setFixedSize(size, size)
