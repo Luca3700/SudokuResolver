@@ -9,7 +9,7 @@ To solve the problem it is used MiniZinc, a free and open-source constraint mode
 
 
 ## Installation and usage
-1. Clone the repo:
+1. Clone this repository
 ```
 git clone https://github.com/Luca3700/SudokuSolver.git
 ```
