@@ -25,6 +25,7 @@ class MainWindow(QMainWindow):
         label = QLabel()
         label.setFixedSize(10,10)
 
+        # defining the cells
         # row 1
         self.cell11 = self.utils.createCell(cellSize)
         self.cell12 = self.utils.createCell(cellSize)
@@ -267,15 +268,22 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(widget)
 
 
+    # action of the "Clear" button
+    def clearAll(self):
+        self.utils.clearAll(self.cells)
+
+    # action of the "Load model" button
     def add_test_file(self):
         file = open("./model/exampleFile.dzn", "r")
         a = file.read()
         file.close()
         resList = self.utils.getResList(a)
-        self.insertCell(resList)
+        #self.insertCell(resList)
+        self.utils.add_test_file(self.cells, resList)
 
+    # action of the "Solve it!" button
     def the_button_was_clicked(self):
-        string = self.create_string()
+        string = self.utils.create_string(self.cells)
         # save the string in the file
         file = open('./model/data.dzn', 'w')
         file.write(string)
@@ -284,288 +292,11 @@ class MainWindow(QMainWindow):
         # solving 
         res = subprocess.run(["minizinc", "./model/solver.mzn", "./model/data.dzn"], capture_output=True)
         if ("=====UNSATISFIABLE=====" in str(res.stdout)):
+            # popup that shows that the sudoku is not solvable
             dlg = CustomDialog()
             dlg.exec()
         else:
             resList = self.utils.getResList(str(res.stdout).split('\'')[1])
-            # self.insertCell(resList, string)
-            self.utils.insertCell(self.cells, resList, string)
-    
-    
-    
-    def create_string(self):
-        string = "pre = \n[| " + \
-            self.cell11.currentText() + ", " + \
-            self.cell12.currentText() + ", " + \
-            self.cell13.currentText() + ", " + \
-            self.cell14.currentText() + ", " + \
-            self.cell15.currentText() + ", " + \
-            self.cell16.currentText() + ", " + \
-            self.cell17.currentText() + ", " + \
-            self.cell18.currentText() + ", " + \
-            self.cell19.currentText() + "\n| " + \
-            \
-            self.cell21.currentText() + ", " + \
-            self.cell22.currentText() + ", " + \
-            self.cell23.currentText() + ", " + \
-            self.cell24.currentText() + ", " + \
-            self.cell25.currentText() + ", " + \
-            self.cell26.currentText() + ", " + \
-            self.cell27.currentText() + ", " + \
-            self.cell28.currentText() + ", " + \
-            self.cell29.currentText() + "\n| " + \
-            \
-            self.cell31.currentText() + ", " + \
-            self.cell32.currentText() + ", " + \
-            self.cell33.currentText() + ", " + \
-            self.cell34.currentText() + ", " + \
-            self.cell35.currentText() + ", " + \
-            self.cell36.currentText() + ", " + \
-            self.cell37.currentText() + ", " + \
-            self.cell38.currentText() + ", " + \
-            self.cell39.currentText() + "\n| " + \
-            \
-            self.cell41.currentText() + ", " + \
-            self.cell42.currentText() + ", " + \
-            self.cell43.currentText() + ", " + \
-            self.cell44.currentText() + ", " + \
-            self.cell45.currentText() + ", " + \
-            self.cell46.currentText() + ", " + \
-            self.cell47.currentText() + ", " + \
-            self.cell48.currentText() + ", " + \
-            self.cell49.currentText() + "\n| " + \
-            \
-            self.cell51.currentText() + ", " + \
-            self.cell52.currentText() + ", " + \
-            self.cell53.currentText() + ", " + \
-            self.cell54.currentText() + ", " + \
-            self.cell55.currentText() + ", " + \
-            self.cell56.currentText() + ", " + \
-            self.cell57.currentText() + ", " + \
-            self.cell58.currentText() + ", " + \
-            self.cell59.currentText() + "\n| " + \
-            \
-            self.cell61.currentText() + ", " + \
-            self.cell62.currentText() + ", " + \
-            self.cell63.currentText() + ", " + \
-            self.cell64.currentText() + ", " + \
-            self.cell65.currentText() + ", " + \
-            self.cell66.currentText() + ", " + \
-            self.cell67.currentText() + ", " + \
-            self.cell68.currentText() + ", " + \
-            self.cell69.currentText() + "\n| " + \
-            \
-            self.cell71.currentText() + ", " + \
-            self.cell72.currentText() + ", " + \
-            self.cell73.currentText() + ", " + \
-            self.cell74.currentText() + ", " + \
-            self.cell75.currentText() + ", " + \
-            self.cell76.currentText() + ", " + \
-            self.cell77.currentText() + ", " + \
-            self.cell78.currentText() + ", " + \
-            self.cell79.currentText() + "\n| " + \
-            \
-            self.cell81.currentText() + ", " + \
-            self.cell82.currentText() + ", " + \
-            self.cell83.currentText() + ", " + \
-            self.cell84.currentText() + ", " + \
-            self.cell85.currentText() + ", " + \
-            self.cell86.currentText() + ", " + \
-            self.cell87.currentText() + ", " + \
-            self.cell88.currentText() + ", " + \
-            self.cell89.currentText() + "\n| " + \
-            \
-            self.cell91.currentText() + ", " + \
-            self.cell92.currentText() + ", " + \
-            self.cell93.currentText() + ", " + \
-            self.cell94.currentText() + ", " + \
-            self.cell95.currentText() + ", " + \
-            self.cell96.currentText() + ", " + \
-            self.cell97.currentText() + ", " + \
-            self.cell98.currentText() + ", " + \
-            self.cell99.currentText() + " |];"
-        return string
+            # inserting the results
+            self.utils.insertInTheCell(self.cells, resList, string)
 
-    def insertCell(self, resList):
-        #dataList = self.utils.getResList(data)
-
-        self.cell11.setCurrentIndex(resList.pop(0))
-        self.cell12.setCurrentIndex(resList.pop(0))
-        self.cell13.setCurrentIndex(resList.pop(0))
-        self.cell14.setCurrentIndex(resList.pop(0))
-        self.cell15.setCurrentIndex(resList.pop(0))
-        self.cell16.setCurrentIndex(resList.pop(0))
-        self.cell17.setCurrentIndex(resList.pop(0))
-        self.cell18.setCurrentIndex(resList.pop(0))
-        self.cell19.setCurrentIndex(resList.pop(0))
-
-        self.cell21.setCurrentIndex(resList.pop(0))
-        self.cell22.setCurrentIndex(resList.pop(0))
-        self.cell23.setCurrentIndex(resList.pop(0))
-        self.cell24.setCurrentIndex(resList.pop(0))
-        self.cell25.setCurrentIndex(resList.pop(0))
-        self.cell26.setCurrentIndex(resList.pop(0))
-        self.cell27.setCurrentIndex(resList.pop(0))
-        self.cell28.setCurrentIndex(resList.pop(0))
-        self.cell29.setCurrentIndex(resList.pop(0))
-
-        self.cell31.setCurrentIndex(resList.pop(0))
-        self.cell32.setCurrentIndex(resList.pop(0))
-        self.cell33.setCurrentIndex(resList.pop(0))
-        self.cell34.setCurrentIndex(resList.pop(0))
-        self.cell35.setCurrentIndex(resList.pop(0))
-        self.cell36.setCurrentIndex(resList.pop(0))
-        self.cell37.setCurrentIndex(resList.pop(0))
-        self.cell38.setCurrentIndex(resList.pop(0))
-        self.cell39.setCurrentIndex(resList.pop(0))
-
-        self.cell41.setCurrentIndex(resList.pop(0))
-        self.cell42.setCurrentIndex(resList.pop(0))
-        self.cell43.setCurrentIndex(resList.pop(0))
-        self.cell44.setCurrentIndex(resList.pop(0))
-        self.cell45.setCurrentIndex(resList.pop(0))
-        self.cell46.setCurrentIndex(resList.pop(0))
-        self.cell47.setCurrentIndex(resList.pop(0))
-        self.cell48.setCurrentIndex(resList.pop(0))
-        self.cell49.setCurrentIndex(resList.pop(0))
-
-        self.cell51.setCurrentIndex(resList.pop(0))
-        self.cell52.setCurrentIndex(resList.pop(0))
-        self.cell53.setCurrentIndex(resList.pop(0))
-        self.cell54.setCurrentIndex(resList.pop(0))
-        self.cell55.setCurrentIndex(resList.pop(0))
-        self.cell56.setCurrentIndex(resList.pop(0))
-        self.cell57.setCurrentIndex(resList.pop(0))
-        self.cell58.setCurrentIndex(resList.pop(0))
-        self.cell59.setCurrentIndex(resList.pop(0))
-
-        self.cell61.setCurrentIndex(resList.pop(0))
-        self.cell62.setCurrentIndex(resList.pop(0))
-        self.cell63.setCurrentIndex(resList.pop(0))
-        self.cell64.setCurrentIndex(resList.pop(0))
-        self.cell65.setCurrentIndex(resList.pop(0))
-        self.cell66.setCurrentIndex(resList.pop(0))
-        self.cell67.setCurrentIndex(resList.pop(0))
-        self.cell68.setCurrentIndex(resList.pop(0))
-        self.cell69.setCurrentIndex(resList.pop(0))
-
-        self.cell71.setCurrentIndex(resList.pop(0))
-        self.cell72.setCurrentIndex(resList.pop(0))
-        self.cell73.setCurrentIndex(resList.pop(0))
-        self.cell74.setCurrentIndex(resList.pop(0))
-        self.cell75.setCurrentIndex(resList.pop(0))
-        self.cell76.setCurrentIndex(resList.pop(0))
-        self.cell77.setCurrentIndex(resList.pop(0))
-        self.cell78.setCurrentIndex(resList.pop(0))
-        self.cell79.setCurrentIndex(resList.pop(0))
-
-        self.cell81.setCurrentIndex(resList.pop(0))
-        self.cell82.setCurrentIndex(resList.pop(0))
-        self.cell83.setCurrentIndex(resList.pop(0))
-        self.cell84.setCurrentIndex(resList.pop(0))
-        self.cell85.setCurrentIndex(resList.pop(0))
-        self.cell86.setCurrentIndex(resList.pop(0))
-        self.cell87.setCurrentIndex(resList.pop(0))
-        self.cell88.setCurrentIndex(resList.pop(0))
-        self.cell89.setCurrentIndex(resList.pop(0))
-
-        self.cell91.setCurrentIndex(resList.pop(0))
-        self.cell92.setCurrentIndex(resList.pop(0))
-        self.cell93.setCurrentIndex(resList.pop(0))
-        self.cell94.setCurrentIndex(resList.pop(0))
-        self.cell95.setCurrentIndex(resList.pop(0))
-        self.cell96.setCurrentIndex(resList.pop(0))
-        self.cell97.setCurrentIndex(resList.pop(0))
-        self.cell98.setCurrentIndex(resList.pop(0))
-        self.cell99.setCurrentIndex(resList.pop(0))
-
-    def clearAll(self):
-        self.cell11.setCurrentIndex(0)
-        self.cell12.setCurrentIndex(0)
-        self.cell13.setCurrentIndex(0)
-        self.cell14.setCurrentIndex(0)
-        self.cell15.setCurrentIndex(0)
-        self.cell16.setCurrentIndex(0)
-        self.cell17.setCurrentIndex(0)
-        self.cell18.setCurrentIndex(0)
-        self.cell19.setCurrentIndex(0)
-
-        self.cell21.setCurrentIndex(0)
-        self.cell22.setCurrentIndex(0)
-        self.cell23.setCurrentIndex(0)
-        self.cell24.setCurrentIndex(0)
-        self.cell25.setCurrentIndex(0)
-        self.cell26.setCurrentIndex(0)
-        self.cell27.setCurrentIndex(0)
-        self.cell28.setCurrentIndex(0)
-        self.cell29.setCurrentIndex(0)
-
-        self.cell31.setCurrentIndex(0)
-        self.cell32.setCurrentIndex(0)
-        self.cell33.setCurrentIndex(0)
-        self.cell34.setCurrentIndex(0)
-        self.cell35.setCurrentIndex(0)
-        self.cell36.setCurrentIndex(0)
-        self.cell37.setCurrentIndex(0)
-        self.cell38.setCurrentIndex(0)
-        self.cell39.setCurrentIndex(0)
-
-        self.cell41.setCurrentIndex(0)
-        self.cell42.setCurrentIndex(0)
-        self.cell43.setCurrentIndex(0)
-        self.cell44.setCurrentIndex(0)
-        self.cell45.setCurrentIndex(0)
-        self.cell46.setCurrentIndex(0)
-        self.cell47.setCurrentIndex(0)
-        self.cell48.setCurrentIndex(0)
-        self.cell49.setCurrentIndex(0)
-
-        self.cell51.setCurrentIndex(0)
-        self.cell52.setCurrentIndex(0)
-        self.cell53.setCurrentIndex(0)
-        self.cell54.setCurrentIndex(0)
-        self.cell55.setCurrentIndex(0)
-        self.cell56.setCurrentIndex(0)
-        self.cell57.setCurrentIndex(0)
-        self.cell58.setCurrentIndex(0)
-        self.cell59.setCurrentIndex(0)
-
-        self.cell61.setCurrentIndex(0)
-        self.cell62.setCurrentIndex(0)
-        self.cell63.setCurrentIndex(0)
-        self.cell64.setCurrentIndex(0)
-        self.cell65.setCurrentIndex(0)
-        self.cell66.setCurrentIndex(0)
-        self.cell67.setCurrentIndex(0)
-        self.cell68.setCurrentIndex(0)
-        self.cell69.setCurrentIndex(0)
-
-        self.cell71.setCurrentIndex(0)
-        self.cell72.setCurrentIndex(0)
-        self.cell73.setCurrentIndex(0)
-        self.cell74.setCurrentIndex(0)
-        self.cell75.setCurrentIndex(0)
-        self.cell76.setCurrentIndex(0)
-        self.cell77.setCurrentIndex(0)
-        self.cell78.setCurrentIndex(0)
-        self.cell79.setCurrentIndex(0)
-
-        self.cell81.setCurrentIndex(0)
-        self.cell82.setCurrentIndex(0)
-        self.cell83.setCurrentIndex(0)
-        self.cell84.setCurrentIndex(0)
-        self.cell85.setCurrentIndex(0)
-        self.cell86.setCurrentIndex(0)
-        self.cell87.setCurrentIndex(0)
-        self.cell88.setCurrentIndex(0)
-        self.cell89.setCurrentIndex(0)
-
-        self.cell91.setCurrentIndex(0)
-        self.cell92.setCurrentIndex(0)
-        self.cell93.setCurrentIndex(0)
-        self.cell94.setCurrentIndex(0)
-        self.cell95.setCurrentIndex(0)
-        self.cell96.setCurrentIndex(0)
-        self.cell97.setCurrentIndex(0)
-        self.cell98.setCurrentIndex(0)
-        self.cell99.setCurrentIndex(0)
