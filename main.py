@@ -13,10 +13,7 @@ try:
     else:
         apply_stylesheet(app, theme='light_blue.xml')
 except:
-    pass
-finally:
     apply_stylesheet(app, theme='light_blue.xml')
-
 
 window = MainWindow()
 window.show()

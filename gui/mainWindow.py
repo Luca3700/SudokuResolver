@@ -1,5 +1,5 @@
 from PyQt5.QtWidgets import QMainWindow, QWidget, QLabel, QGridLayout, QPushButton
-from PyQt5.QtGui import QIcon, QFont
+from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import QDir
 import subprocess
 from gui.customDialog import *
@@ -256,7 +256,6 @@ class MainWindow(QMainWindow):
 
         # button to load the example sudoku
         button = QPushButton("Load\nmodel")
-        button.setFont(QFont('Times',5))
         button.setCheckable(True)
         button.setFixedSize(cellSize, 50)
         layout.addWidget(button, 12, 9)

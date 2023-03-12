@@ -1,5 +1,4 @@
-from PyQt5.QtWidgets import QComboBox
-
+from gui.customComboBox import *
 
 class Utils():
     def __init__(self):
@@ -7,10 +6,7 @@ class Utils():
 
     def createCell(self, size):
         # crete che combobox
-        items = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
-        cell = QComboBox()
-        cell.addItems(items)
-        cell.setCurrentIndex(0)
+        cell = customComboBox()
         cell.setFixedSize(size, size)
         return cell
 
@@ -64,25 +60,10 @@ class Utils():
         # clear all the cells
         for cell in cells:
             cell.setCurrentIndex(0)
-            cell.setStyleSheet("QComboBox"
-                        "{"
-                        "border : 1px black;"
-                        "border-style : none;"
-                        "}")   
+  
 
     def add_test_file(self, cells, resList):
         # insert in the cells the numbers in exampleFile.dzn
         for i in range(len(resList)):
             cells[i].setCurrentIndex(resList[i])
-            if resList[i] == 0:
-                cells[i].setStyleSheet("QComboBox"
-                        "{"
-                        "border : 1px black;"
-                        "border-style : none;"
-                        "}")
-            else:
-                cells[i].setStyleSheet("QComboBox"
-                        "{"
-                        "border : 1px black;"
-                        "border-style : solid;"
-                        "}")
+
