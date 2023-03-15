@@ -18,7 +18,11 @@ git clone https://github.com/Luca3700/SudokuSolver.git
 pip install -r requirements.txt
 ````
 3. Install minizinc following the documentation [here](https://www.minizinc.org/software.html)
-4. Run from the home directory of the project
+4. Verify that minizinc is correctly installed typing
+```
+minizinc --version
+```
+5. Run from the home directory of the project
 ```
 python3 main.py
 ```
